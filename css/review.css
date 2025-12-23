@@ -1,0 +1,131 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+#page-content-wrapper {
+    margin-left: 280px;
+    width: calc(100% - 280px);
+    min-height: 100vh;
+    background: #f8f9fa;
+}
+
+.hero-wrap h1 {
+    z-index: 1;
+    font-family: 'Arizonia', cursive !important;
+    font-size: 72px !important;
+    color: #F96D00 !important;
+    text-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+}
+
+/* Review Cards */
+.review-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.review-icons span {
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: 16px;
+    color: #888;
+}
+
+.review-icons span.hearted {
+    color: #dc3545;
+}
+
+/* Thank You Modal */
+.thankyou-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.7);
+    z-index: 9999;
+
+    display: none; /* ✅ ONLY THIS */
+
+    justify-content: center;
+    align-items: center;
+}
+
+
+.thankyou-box {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+}
+/* MOBILE RESPONSIVE FIXES */
+@media (max-width: 991px) {
+
+    /* Sidebar becomes hidden by default */
+    #page-content-wrapper {
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+
+    #sidebar-wrapper {
+        width: 260px;
+        left: -260px;
+        transition: 0.3s ease;
+        position: fixed;
+        height: 100vh;
+        z-index: 9999;
+    }
+
+    /* When sidebar is opened */
+    #wrapper.toggled #sidebar-wrapper {
+        left: 0;
+    }
+
+    /* Menu button */
+    #menu-toggle {
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        z-index: 10000;
+        background: #F96D00;
+        color: white;
+        border: none;
+        padding: 10px 12px;
+        border-radius: 6px;
+        font-size: 20px;
+    }
+
+    /* Hero title size */
+    .hero-wrap h1 {
+        font-size: 42px !important;
+    }
+
+    /* Review cards stack better */
+    .review-card {
+        margin-bottom: 15px;
+    }
+
+    /* Fix form spacing */
+    #reviewForm {
+        margin-bottom: 30px;
+    }
+
+    /* Modal responsive */
+    .modal-lg {
+        width: 95% !important;
+        margin: auto;
+    }
+}
+
+/* EXTRA SMALL PHONES */
+@media (max-width: 576px) {
+    .hero-wrap h1 {
+        font-size: 32px !important;
+    }
+
+    #menu-toggle {
+        font-size: 18px;
+        padding: 8px 10px;
+    }
+}

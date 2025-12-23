@@ -1,0 +1,58 @@
+/* Title + arrow row */
+.title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* ---------- NEXT BUTTON ---------- */
+.next-btn {
+    background: #F96D00;
+    color: #fff;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background 0.3s ease, transform 0.3s ease;
+    animation: pulse 2s infinite;
+}
+
+/* Hover effect */
+.next-btn:hover {
+    background: #145a17;
+    transform: scale(1.1);
+}
+
+/* Arrow animation */
+.next-btn i {
+    transition: transform 0.3s ease;
+}
+
+.next-btn:hover i {
+    transform: translateX(6px);
+}
+
+/* Pulse animation */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(249, 109, 0, 0.6);
+    }
+    70% {
+        box-shadow: 0 0 0 12px rgba(249, 109, 0, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(249, 109, 0, 0);
+    }
+}
+
+/* Images */
+.slider-img img {
+    width: 100%;
+    border-radius: 10px;
+}
