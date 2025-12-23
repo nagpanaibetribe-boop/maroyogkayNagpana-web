@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Maroyog Kay Nagpana - Booking</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- App CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Sidebar (keeps all sidebar rules centrally in sidebar.css) -->
+    <link rel="stylesheet" href="css/sidebar.css">
+
+    <style>
+        /* Small overrides for booking page layout only (kept minimal) */
+        #page-content-wrapper { transition: all .25s ease; }
+        /* Make menu-toggle visible on small screens (sidebar.css also reveals it) */
+        #menu-toggle { display: none; }
+        @media (max-width: 991px) {
+            #menu-toggle { display: block; }
+        }
+
+        /* Hero area */
+        .hero-wrap {
+            position: relative;
+            height: 40vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            text-align:center;
+            overflow:hidden;
+        }
+        .hero-wrap::before {
+            content:"";
+            position:absolute;
+            top:0; left:0; right:0; bottom:0;
+            background-image:url('img/contact.jpg');
+            background-size:cover;
+            background-position:center;
+            opacity:0.5;
+            z-index:0;
+        }
+        .hero-wrap h1 {
+            position:relative;
+            z-index:1;
+            font-family:'Arizonia', cursive;
+            font-size:72px;
+            color:#F96D00;
+            text-shadow:3px 3px 10px rgba(0,0,0,0.5);
+        }
+
+        /* Make iframe responsive */
+        #map { width:100%; height:450px; border:0; }
+        @media (max-width:576px) { #map { height:250px; } }
+
+        /* Modal dialog fix for small screens */
+        .modal-dialog { margin: 1.2rem auto; }
+    </style>
+</head>
+<body>
+
+    <!-- Hamburger - toggles sidebar on mobile -->
+<button id="menu-toggle" aria-label="Toggle menu">
+    <i class="fa fa-bars"></i>
+</button>
+
+<!-- 🔹 GCash QR MODAL -->
+<div class="modal fade" id="gcashModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">GCash 50% Advance Payment</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body text-center">
+                <p>Please scan the QR code below to pay <strong>50% advance</strong>.</p>
+
+                <!-- Replace with your real QR image -->
+                <img src="img/gcash-qr.png"
+                     alt="GCash QR Code"
+                     class="img-fluid mb-3"
+                     style="max-width:250px;">
+
+                <p class="text-muted">
+                    After payment, click <strong>Done</strong> to upload proof.
+                </p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal">
+                    Cancel
+                </button>
+
+                <button type="button"
+                        class="btn btn-success"
+                        id="gcashDoneBtn">
+                    Done
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+    <div id="wrapper">
+        <!-- Sidebar (kept in sidebar.css) -->
+        <div id="sidebar-wrapper" aria-hidden="false">
+            <div class="sidebar-heading">
+                <a class="navbar-brand text-white" href="index.html">Maroyog</a>
+                <span>Kay Nagpana</span>
+            </div>
+            <br>
+            <div class="list-group list-group-flush">
+                <a href="index.html" class="list-group-item">Home</a>
+                <a href="people.html" class="list-group-item">People</a>
+                <a href="product.html" class="list-group-item">Product</a>
+                <a href="culture.html" class="list-group-item">Culture</a>
+                <a href="language.html" class="list-group-item">Language</a>
+                <a href="tourist_spot.html" class="list-group-item">Touirist Spot</a>
+                <a href="review.html" class="list-group-item">Review</a>
+                <a href="booking.html" class="list-group-item active">Booking</a>
+            </div>
+        </div>
+
+        <!-- Page content -->
+        <div id="page-content-wrapper">
+            <div class="hero-wrap">
+                <h1>Book a Visit</h1>
+            </div>
+
+            <section class="ftco-section ftco-no-pb contact-section mb-4">
+                <div class="container">
+                    <div class="row d-flex contact-info">
+                        <div class="col-md-3 d-flex">
+                            <div class="align-self-stretch box p-4 text-center">
+                                <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-map-marker"></span></div>
+                                <h3 class="mb-2">Address</h3>
+                                <p>Barotac Viejo, Iloilo City, Philippines</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 d-flex">
+                            <div class="align-self-stretch box p-4 text-center">
+                                <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-phone"></span></div>
+                                <h3 class="mb-2">Contact Number</h3>
+                                <p><a href="tel:+639000000000">+639000000000</a></p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 d-flex">
+                            <div class="align-self-stretch box p-4 text-center">
+                                <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-paper-plane"></span></div>
+                                <h3 class="mb-2">Email Address</h3>
+                                <p><a href="mailto:info@nagpana.com">info@nagpana.com</a></p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 d-flex">
+                            <div class="align-self-stretch box p-4 text-center">
+                                <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-globe"></span></div>
+                                <h3 class="mb-2">Website</h3>
+                                <p><a href="#">nagpana.com</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="ftco-section contact-section ftco-no-pt">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 d-flex">
+                            <div class="bg-light p-5 contact-form text-center w-100" id="initialBookingArea">
+                                <!-- 🔹 LIVE SCHEDULE CARD (Firebase-controlled) -->
+<div class="schedule-card mb-4 text-left" id="scheduleCard">
+
+    <h5>📅 Visit Schedule</h5>
+
+    <div class="schedule-row">
+        <span>Monday – Friday</span>
+        <strong id="schedWeekdays">Loading...</strong>
+    </div>
+
+    <div class="schedule-row">
+        <span>Saturday</span>
+        <strong id="schedSaturday">Loading...</strong>
+    </div>
+
+    <div class="schedule-row">
+        <span>Sunday</span>
+        <strong id="schedSunday">Loading...</strong>
+    </div>
+
+    <hr>
+
+    <div id="bookingStatusBox" class="text-center">
+        <span class="badge badge-info" id="bookingStatusText">
+            Checking availability...
+        </span>
+    </div>
+
+</div>
+
+                                <h4 class="mb-4">Ready to visit the Nagpana Tribe?</h4>
+                                <div id="statusMessage" class="mb-4"><p class="text-info">Click the button to start your booking.</p></div>
+                                <button type="button" class="btn btn-primary py-3 px-5" id="mainBookingTriggerBtn">Book a Visit</button>
+                                <button type="button" class="btn btn-danger py-2 px-4 mt-3" id="logoutBtn" style="display:none">Logout</button>
+                            </div>
+
+                            <form class="bg-light p-5 contact-form w-100" id="bookingForm" style="display:none;">
+                                <h4>Complete Your Booking Details</h4>
+                                <div id="bookingMessage" class="mb-3"></div>
+
+                                <div class="form-group">
+                                    <input type="text" id="fullName" class="form-control" placeholder="Your Full Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" id="contactNumber" class="form-control" placeholder="Your Phone Number" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" id="emailAddress" class="form-control" placeholder="Your Email" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <input type="number" id="headCount" min="1" class="form-control" placeholder="Head Count" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="date" id="visitDate" class="form-control" min="2025-12-05" required>
+                                </div>
+
+                              <div class="form-check mb-2">
+    <input class="form-check-input" type="checkbox" id="tourGuide">
+    <label class="form-check-label" for="tourGuide">
+        Avail a tour guide for ₱500 only.
+    </label>
+</div>
+
+<div class="form-check mb-3">
+    <input class="form-check-input" type="checkbox" id="cottage">
+    <label class="form-check-label" for="cottage">
+        Avail a cottage for ₱500 only.
+    </label>
+</div>
+
+<hr>
+
+<!-- 🔹 GCash Advance Payment -->
+<div class="form-check mb-3">
+    <input class="form-check-input" type="checkbox" id="gcashAdvance">
+    <label class="form-check-label" for="gcashAdvance">
+        Pay 50% Advance via GCash (required to proceed)
+    </label>
+</div>
+
+<!-- Proof Upload (hidden until QR done) -->
+<div class="form-group" id="gcashProofWrapper" style="display:none;">
+    <label>Upload GCash Payment Proof</label>
+    <input type="file"
+           id="gcashProof"
+           class="form-control"
+           accept="image/*">
+    <small class="text-danger d-none" id="gcashProofError">
+        Proof of payment is required.
+    </small>
+</div>
+
+                                <button type="button" class="btn btn-primary py-3 px-5" id="submitBookingBtn">Submit Booking</button>
+                            </form>
+                        </div>
+
+                        <div class="col-md-6 d-flex">
+                            <iframe id="map"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15379.406429009177!2d122.81744099137714!3d11.107732797043285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33af38b8ef3d5ce3%3A0xa1bd7ee6f404807a!2sNagpana%20Falls!5e1!3m2!1sen!2sph!4v1757831155475!5m2!1sen!2sph"
+                                allowfullscreen loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="ftco-footer bg-bottom ftco-no-pt" style="background-image:url(images/bg_3.jpg);">
+                <!-- (optional footer content) -->
+            </footer>
+        </div>
+    </div>
+
+    <!-- MODALS (kept simple and bootstrap-friendly) -->
+
+    <!-- Auth choice -->
+    <div class="modal fade" id="authChoiceModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document"><div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Start Your Booking</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body text-center">
+                <p>To proceed, please Sign In or Register.</p>
+                <button type="button" class="btn btn-success btn-block mb-2" id="showSigninModalBtn">Sign In</button>
+                <button type="button" class="btn btn-primary btn-block" id="showSignupModalBtn">Register / Sign Up</button>
+            </div>
+        </div></div>
+    </div>
+
+    <!-- Signup -->
+    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document"><div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Register New Account</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <form id="signupForm">
+                    <div class="form-group"><input type="text" id="signupUsername" class="form-control" placeholder="Username" required></div>
+                    <div class="form-group"><input type="email" id="signupEmail" class="form-control" placeholder="Email" required></div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="password" id="signupPassword" class="form-control" placeholder="Password (min 6 characters)" required minlength="6">
+                            <div class="input-group-append"><span class="input-group-text" id="toggleSignupPassword" style="cursor:pointer;"><i class="fa fa-eye"></i></span></div>
+                        </div>
+                    </div>
+                    <div id="signupMessage" class="text-danger mb-3"></div>
+                    <button type="submit" class="btn btn-primary btn-block">Register</button>
+                </form>
+            </div>
+        </div></div>
+    </div>
+
+    <!-- Signin -->
+    <div class="modal fade" id="signinModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document"><div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Sign In</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <form id="signinForm">
+                    <div class="form-group"><input type="email" id="signinEmail" class="form-control" placeholder="Email" required></div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="password" id="signinPassword" class="form-control" placeholder="Password" required>
+                            <div class="input-group-append"><span class="input-group-text" id="toggleSigninPassword" style="cursor:pointer;"><i class="fa fa-eye"></i></span></div>
+                        </div>
+                    </div>
+                    <div id="signinMessage" class="text-danger mb-3"></div>
+                    <button type="submit" class="btn btn-success btn-block">Sign In</button>
+                </form>
+            </div>
+        </div></div>
+    </div>
+
+    <!-- Terms -->
+    <div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document"><div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title">Responsible Tourism Guidelines</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <p>By proceeding, you agree to:</p>
+                <ul>
+                    <li>Respect the Nagpana Ati Tribe's culture and privacy.</li>
+                    <li>Follow all environmental rules.</li>
+                    <li>Engage only in sustainable interactions.</li>
+                </ul>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="acceptTerms">
+                    <label class="form-check-label" for="acceptTerms">I accept the responsible tourism guidelines.</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="confirmBooking" disabled>Confirm & Submit</button>
+            </div>
+        </div></div>
+    </div>
+
+    <!-- Success -->
+    <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document"><div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-success">✅ Booking Successful!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">Your visit has been successfully booked.</div>
+            <div class="modal-footer"><button type="button" class="btn btn-primary" data-dismiss="modal">Close</button></div>
+        </div></div>
+    </div>
+<!-- JS (jquery -> popper -> bootstrap) -->
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+<script src="js/booking-script.js"></script>
+
+
+<script>
+(function ($) {
+
+    const $wrapper = $('#wrapper');
+    const $menuToggle = $('#menu-toggle');
+
+    /* ✅ Sidebar Toggle (FINAL FIXED VERSION) */
+    $menuToggle.on('click', function (e) {
+        e.preventDefault();
+        $wrapper.toggleClass('toggled');
+
+        // Update aria-expanded (safe to keep)
+        const expanded = $wrapper.hasClass('toggled');
+        $menuToggle.attr('aria-expanded', expanded);
+    });
+
+    /* Highlight Active Link */
+    const currentPage = location.pathname.split('/').pop() || 'index.html';
+    $('#sidebar-wrapper .list-group-item').each(function () {
+        const href = $(this).attr('href');
+        $(this).toggleClass('active', href === currentPage);
+    });
+
+    /* Close only the clicked modal */
+    $(document).on('click', '.modal .close, .modal [data-dismiss="modal"]', function () {
+        $(this).closest('.modal').modal('hide');
+    });
+
+    /* Click outside sidebar to close (mobile only) */
+    $(document).on('click touchstart', function (e) {
+        if ($wrapper.hasClass('toggled')) {
+            const $target = $(e.target);
+            if (!$target.closest('#sidebar-wrapper').length &&
+                !$target.closest('#menu-toggle').length) {
+                $wrapper.removeClass('toggled');
+            }
+        }
+    });
+
+    /* Stack modal fix */
+    $('#showSigninModalBtn').on('click', function () {
+        $('#authChoiceModal').modal('hide');
+        setTimeout(function () { $('#signinModal').modal('show'); }, 250);
+    });
+    $('#showSignupModalBtn').on('click', function () {
+        $('#authChoiceModal').modal('hide');
+        setTimeout(function () { $('#signupModal').modal('show'); }, 250);
+    });
+
+})(jQuery);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Maroyog Kay Nagpana - Products</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- GOOGLE FONTS -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">
+
+  <!-- ICONS & CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/animate.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/product.css">
+</head>
+
+<body>
+
+<button id="menu-toggle"><i class="fa fa-bars"></i></button>
+
+<div id="wrapper">
+
+  <!-- SIDEBAR -->
+  <div id="sidebar-wrapper">
+    <div class="sidebar-heading">
+      <a class="navbar-brand text-white" href="index.html">Maroyog</a>
+      <span>Kay Nagpana</span>
+    </div>
+
+    <div class="list-group list-group-flush">
+      <a href="index.html" class="list-group-item">Home</a>
+      <a href="people.html" class="list-group-item">People</a>
+      <a href="product.html" class="list-group-item active">Product</a>
+      <a href="culture.html" class="list-group-item">Culture</a>
+      <a href="language.html" class="list-group-item">Language</a>
+      <a href="tourist_spot.html" class="list-group-item">Tourist Spot</a>
+      <a href="review.html" class="list-group-item">Review</a>
+      <a href="booking.html" class="list-group-item">Booking</a>
+    </div>
+  </div>
+
+  <!-- PAGE CONTENT -->
+  <div id="page-content-wrapper">
+
+    <!-- HERO -->
+    <section class="hero-products">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1 class="hero-title">Nagpana Products</h1>
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="ftco-section">
+      <div class="container">
+        <div class="row" id="productList">
+          <!-- PRODUCTS LOAD HERE -->
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div class="modal fade" id="productModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 id="modalTitle"></h5>
+      <button type="button" class="close" id="closeModalBtn">
+  <span>&times;</span>
+</button>
+</div>
+
+      <div class="modal-body">
+        <p id="modalOwner"></p>
+        <p id="modalContact"></p>
+        <p id="modalLocation"></p>
+        <hr>
+        <p id="modalInfo"></p>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+        <footer class="ftco-footer bg-bottom ftco-no-pt" style="background-image: url(images/bg_3.jpg);">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-md pt-5">
+                        <div class="ftco-footer-widget pt-md-5 mb-4">
+                            <h2 class="ftco-heading-2">About</h2>
+                            <p>One of thousands of indigenous tribe in the Philippines Maroyog Kay Nagpana is a tribe living in the mountains of Barotac Viejo Iloilo.</p>
+                        </div>
+                    </div>
+                    <div class="col-md pt-5 border-left"></div>
+                    <div class="col-md pt-5 border-left"></div>
+                    <div class="col-md pt-5 border-left">
+                        <div class="ftco-footer-widget pt-md-5 mb-4">
+                            <h2 class="ftco-heading-2">Have a Questions?</h2>
+                            <ul>
+                                <li><span class="icon fa fa-map-marker"></span> Barotac Viejo, Iloilo City, Philippines</li>
+                                <li><span class="icon fa fa-phone"></span> +639090000000</li>
+                                <li><span class="icon fa fa-paper-plane"></span> info@nagpana.com</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+    <div class="col-md-12 text-center">
+        <p>&copy; <script>document.write(new Date().getFullYear());</script> Maroyog Kay Nagpana. Developed for Academic and Cultural Purposes.</p>
+    </div>
+</div>
+
+            </div>
+        </footer>
+
+<!-- ================= SCRIPTS ================= -->
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<!-- FIREBASE v8 (REQUIRED) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<script>
+/* ===============================
+   FIREBASE CONFIG
+================================ */
+firebase.initializeApp({
+  apiKey: "AIzaSyDmkohQTE5Abuguruyfq0oRQAKoJBqPygs",
+  authDomain: "nagpanatribe.firebaseapp.com",
+  databaseURL: "https://nagpanatribe-default-rtdb.firebaseio.com",
+  projectId: "nagpanatribe"
+});
+
+/* ===============================
+   STATIC IMAGE MAP (LOCAL FILES)
+================================ */
+const imageMap = {
+  p1: "img/products/kape-nagpana.jpg",
+  p2: "img/products/beans.jpg",
+  p3: "img/products/fruits.jpg",
+  p4: "img/products/robusta.jpg",
+  p5: "img/products/bracelets.jpg",
+  p6: "img/products/wallets.jpg",
+  p7: "img/products/23.jpg",
+  p8: "img/products/fruitshake.jpeg",
+  p9: "img/products/spatula.jpg"
+};
+
+/* ===============================
+   LOAD PRODUCTS (DYNAMIC)
+================================ */
+firebase.database().ref("products").on("value", snapshot => {
+  let html = "";
+
+  snapshot.forEach(child => {
+    const p = child.val();
+    const img = imageMap[child.key] || "img/products/default.jpg";
+
+    html += `
+      <div class="col-md-4">
+        <div class="project-wrap mb-4"
+          data-name="${p.name}"
+          data-owner="${p.owner}"
+          data-contact="${p.contact}"
+          data-location="${p.location}"
+          data-info="${p.info}">
+
+          <a class="img" style="background-image:url('${img}')">
+            <span class="price">₱${p.price}</span>
+          </a>
+
+          <div class="text p-4">
+            <span class="days">${p.category}</span>
+            <h3>${p.name}</h3>
+            <p class="location">
+              <span class="fa fa-map-marker"></span> ${p.location}
+            </p>
+            <button class="btn btn-primary btn-sm see-more">See More</button>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  $("#productList").html(html);
+
+  $(".see-more").on("click", function () {
+    const card = $(this).closest(".project-wrap");
+
+    $("#modalTitle").text(card.data("name"));
+    $("#modalOwner").text("Owner: " + card.data("owner"));
+    $("#modalContact").text("Contact: " + card.data("contact"));
+    $("#modalLocation").text("Location: " + card.data("location"));
+    $("#modalInfo").text(card.data("info"));
+
+    $("#productModal").modal("show");
+  });
+});
+</script>
+<script>
+  $("#menu-toggle").on("click", function (e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+  });
+</script>
+<script>
+  // Close modal when X button clicked
+  $("#closeModalBtn").on("click", function () {
+    $("#productModal").modal("hide");
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Culture Gallery</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- FONTS -->
+<link href="https://fonts.googleapis.com/css?family=Poppins:400,600" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+body {
+  font-family: Poppins, sans-serif;
+  background: #ffffff;
+  margin: 0;
+  padding: 20px;
+}
+
+/* BACK BUTTON */
+.back-btn {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  font-size: 22px;
+  color: #000;
+  z-index: 1000;
+}
+
+/* SWITCH BUTTONS */
+.switcher {
+  text-align: center;
+  margin: 40px 0;
+}
+.switcher button {
+  padding: 10px 25px;
+  margin: 0 8px;
+  border: none;
+  background: #ffffff;
+  color: #ff5e3a;
+  font-weight: 600;
+  cursor: pointer;
+}
+.switcher button.active {
+  background: #ff5e3a;
+  color: #000;
+}
+
+/* SECTIONS */
+.section { display: none; }
+.section.active { display: block; }
+
+/* VIDEO GRID */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* VIDEO CARD */
+.video-card {
+  background: #ebb26d;
+  border-radius: 14px;
+  padding: 14px;
+  cursor: pointer;
+}
+.video-card video {
+  width: 100%;
+  border-radius: 10px;
+}
+.video-card h4 {
+  margin: 10px 0 2px;
+  font-family: 'Arizonia', cursive;
+  font-size: 32px;
+  font-weight: normal;
+}
+.video-card button {
+  background: none;
+  border: none;
+  color: #ff5e3a;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* MODAL */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  width: 90%;
+  max-width: 520px;
+  border-radius: 12px;
+}
+.modal-content video {
+  width: 100%;
+  border-radius: 10px;
+}
+#modalTitle {
+  font-family: 'Arizonia', cursive;
+  font-size: 36px;
+  margin-top: 15px;
+}
+.close {
+  float: right;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* PHOTO LAYOUT */
+.photo-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 50px;
+  max-width: 1100px;
+  margin: auto;
+  align-items: center;
+}
+
+/* BIG IMAGE */
+.photo-viewer img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 12px solid #ff5e3a;
+  box-shadow: 0 15px 30px rgba(0,0,0,.25);
+  transition: opacity 1s ease;
+  display: block;
+  margin: auto;
+}
+
+
+/* PHOTO TEXT */
+.photo-text {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+}
+.photo-text h3 {
+  font-family: 'Arizonia', cursive;
+  font-size: 38px;
+  margin-bottom: 10px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .video-grid {
+    grid-template-columns: 1fr;
+  }
+  .photo-layout {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .photo-viewer img {
+    max-width: 320px;
+    margin: auto;
+  }
+}
+@media (max-width: 768px) {
+
+  body {
+    padding: 10px;
+  }
+
+  .video-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .photo-layout {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    text-align: center;
+  }
+
+  .photo-viewer img {
+    max-width: 90%;
+    border-width: 8px;
+  }
+
+  .photo-text {
+    padding: 20px;
+  }
+
+  .photo-text h3 {
+    font-size: 30px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<a href="culture.html" class="back-btn"><i class="fa fa-arrow-left"></i></a>
+
+<div class="switcher">
+  <button id="btnVideos">Videos</button>
+  <button id="btnPhotos">Photos</button>
+</div>
+
+<!-- VIDEOS -->
+<div id="videos" class="section">
+  <div class="video-grid">
+
+    <div class="video-card" data-video="./videos/v1.mp4" onclick="openModal(this, 0)">
+      <video src="./videos/v1.mp4"></video>
+      <h4>Culture Dance</h4>
+      <button>See more</button>
+    </div>
+
+    <div class="video-card" data-video="./videos/v10.mp4" onclick="openModal(this, 1)">
+      <video src="./videos/v10.mp4"></video>
+      <h4>Harvest Ritual</h4>
+      <button>See more</button>
+    </div>
+
+    <div class="video-card" data-video="./videos/v6.mp4" onclick="openModal(this, 2)">
+      <video src="./videos/v6.mp4"></video>
+      <h4>Wedding Ceremony</h4>
+      <button>See more</button>
+    </div>
+
+    <div class="video-card" data-video="./videos/v3.mp4" onclick="openModal(this, 3)">
+      <video src="./videos/v3.mp4"></video>
+      <h4>Community Gathering</h4>
+      <button>See more</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- PHOTOS -->
+<div id="photos" class="section">
+  <div class="photo-layout">
+    <div class="photo-viewer">
+      <img id="photoDisplay" src="./culture/8.jpg">
+    </div>
+    <div class="photo-text" id="photoText">
+      <h3>Golden Hour Tradition</h3>
+      <p>Peaceful reflection during sunset.</p>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">✖</span>
+    <video controls id="modalVideo"></video>
+    <h3 id="modalTitle"></h3>
+    <p id="modalText"></p>
+  </div>
+</div>
+
+<script>
+/* SWITCH WITH MEMORY */
+const btnVideos = document.getElementById("btnVideos");
+const btnPhotos = document.getElementById("btnPhotos");
+const videos = document.getElementById("videos");
+const photos = document.getElementById("photos");
+
+function showSection(section) {
+  if (section === "photos") {
+    btnPhotos.classList.add("active");
+    btnVideos.classList.remove("active");
+    photos.classList.add("active");
+    videos.classList.remove("active");
+    localStorage.setItem("gallerySection", "photos");
+  } else {
+    btnVideos.classList.add("active");
+    btnPhotos.classList.remove("active");
+    videos.classList.add("active");
+    photos.classList.remove("active");
+    localStorage.setItem("gallerySection", "videos");
+  }
+}
+
+btnVideos.onclick = () => showSection("videos");
+btnPhotos.onclick = () => showSection("photos");
+
+/* RESTORE LAST VIEW AFTER REFRESH */
+const savedSection = localStorage.getItem("gallerySection") || "videos";
+showSection(savedSection);
+
+/* VIDEO DATA */
+const videoData = [
+  { title: "Culture Dance", text: "A sacred dance passed through generations." },
+  { title: "Harvest Ritual", text: "A ritual thanking nature for abundance." },
+  { title: "Wedding Ceremony", text: "A union celebrated with music and tradition." },
+  { title: "Community Gathering", text: "Strengthening bonds within the tribe." }
+];
+
+const modal = document.getElementById("modal");
+const modalVideo = document.getElementById("modalVideo");
+const modalTitle = document.getElementById("modalTitle");
+const modalText = document.getElementById("modalText");
+
+function openModal(card, i) {
+  modal.style.display = "flex";
+  modalVideo.src = card.dataset.video;
+  modalVideo.play();
+  modalTitle.innerText = videoData[i].title;
+  modalText.innerText = videoData[i].text;
+}
+
+function closeModal() {
+  modal.style.display = "none";
+  modalVideo.pause();
+  modalVideo.src = "";
+}
+
+/* PHOTO AUTO SLIDE */
+const photoData = [
+  { img: "./culture/8.jpg", title: "Golden Hour Tradition", text: "Peaceful reflection during sunset." },
+  { img: "./culture/10.jpg", title: "Journey Together", text: "Unity and shared paths in tribal life." },
+  { img: "./people/21.jpg", title: "New Life", text: "Children symbolize hope and continuity." },
+  { img: "./culture/11.jpg", title: "Nature and Identity", text: "The forest is central to culture and belief." },
+  { img: "./culture/5.jpg", title: "Pride and Heritage", text: "A portrait of dignity and tradition." }
+]
+
+let current = 0;
+const imgEl = document.getElementById("photoDisplay");
+const textEl = document.getElementById("photoText");
+
+setInterval(() => {
+  imgEl.style.opacity = 0;
+  setTimeout(() => {
+    current = (current + 1) % photoData.length;
+    imgEl.src = photoData[current].img;
+    textEl.innerHTML = `<h3>${photoData[current].title}</h3><p>${photoData[current].text}</p>`;
+    imgEl.style.opacity = 1;
+  }, 1000);
+}, 6000);
+</script>
+
+</body>
+</html>

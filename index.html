@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Maroyog Kay Nagpana - Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FONTS & ICONS -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- CSS FILES -->
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/homesidebar.css">
+    <link rel="stylesheet" href="css/index.css">
+
+    <!-- CHART JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<!-- HAMBURGER -->
+<button id="menu-toggle">
+    <i class="fa fa-bars"></i>
+</button>
+
+<!-- ================= VIDEO MODAL ================= -->
+<div id="videoModal" class="video-modal">
+    <div class="video-box">
+        <span id="closeVideo" class="close-video">&times;</span>
+        <video id="popupVideo" controls>
+            <source src="./videos/home.mp4" type="video/mp4">
+        </video>
+    </div>
+</div>
+
+<!-- VIDEO BUTTON -->
+<div class="video-center">
+    <button class="open-video-btn">
+        <span class="fa fa-play"></span>
+    </button>
+</div>
+
+<!-- ================= ANALYTICS BUTTON ================= -->
+<div class="analytics-button">
+    <button id="openAnalytics">
+        <i class="fa fa-bar-chart"></i> Explore Analytics
+    </button>
+</div>
+
+<div id="wrapper">
+
+<!-- ================= SIDEBAR ================= -->
+<div id="sidebar-wrapper">
+    <div class="sidebar-heading">
+        <a class="navbar-brand text-white" href="#">Maroyog</a>
+        <span>Kay Nagpana</span>
+    </div>
+    <br>
+    <div class="list-group list-group-flush">
+        <a href="index.html" class="list-group-item active">Home</a>
+        <a href="people.html" class="list-group-item">People</a>
+        <a href="product.html" class="list-group-item">Product</a>
+        <a href="culture.html" class="list-group-item">Culture</a>
+        <a href="language.html" class="list-group-item">Language</a>
+        <a href="tourist_spot.html" class="list-group-item">Tourist Spot</a>
+        <a href="review.html" class="list-group-item">Review</a>
+        <a href="booking.html" class="list-group-item">Booking</a>
+    </div>
+</div>
+
+<!-- ================= MAIN CONTENT ================= -->
+<div id="page-content-wrapper">
+
+<!-- HERO CAROUSEL -->
+<div class="owl-carousel hero-carousel">
+
+    <div class="hero-slide" style="background-image:url('./hero/welcome.jpeg');">
+        <div class="slider-text">
+            <span class="subheading">Discover Your Favorite Place</span>
+            <h1>Welcome to Maroyog Kay Nagpana</h1>
+            <p>Explore culture, people, and traditions.</p>
+        </div>
+    </div>
+
+    <div class="hero-slide" style="background-image:url('./hero/hero1.jpg');">
+        <div class="slider-text">
+            <span class="subheading">Nature & Culture</span>
+            <h1>Experience Nagpana</h1>
+            <p>Discover traditions and lifestyle.</p>
+        </div>
+    </div>
+
+    <div class="hero-slide" style="background-image:url('./hero/Nagpana.jpg');">
+        <div class="slider-text">
+            <span class="subheading">Explore More</span>
+            <h1>Your Adventure Awaits</h1>
+            <p>Learn more about the community.</p>
+        </div>
+    </div>
+
+</div>
+
+</div>
+</div>
+
+<!-- ================= ANALYTICS MODAL ================= -->
+<div id="analyticsModal" class="analytics-modal">
+    <div class="analytics-content">
+        <span id="closeAnalytics" class="close-analytics">&times;</span>
+<br>
+<br>
+        <h3 style="text-align:center;margin-bottom:20px;">
+            Maroyog Kay Nagpana – Tourism Analytics
+        </h3>
+
+        <div class="charts-wrapper">
+            <div>
+                <h4>Tourist Analytics (2025)</h4>
+                <div class="chart-container">
+                    <canvas id="touristBarChart"></canvas>
+                </div>
+            </div>
+
+            <div>
+                <h4>Tribe Population</h4>
+                <div class="chart-container">
+                    <canvas id="populationPieChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================= SCRIPTS ================= -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+
+<script>
+$(".hero-carousel").owlCarousel({
+    items: 1,
+    loop: true,
+    autoplay: true,
+    autoplayTimeout: 4000,
+    nav: true,
+    dots: true,
+    animateOut: 'fadeOut'
+});
+</script>
+
+<!-- VIDEO MODAL JS -->
+<script>
+const videoModal = document.getElementById("videoModal");
+const openVideo = document.querySelector(".open-video-btn");
+const closeVideo = document.getElementById("closeVideo");
+const video = document.getElementById("popupVideo");
+
+openVideo.onclick = () => {
+    videoModal.style.display = "flex";
+    video.play();
+};
+
+closeVideo.onclick = () => {
+    videoModal.style.display = "none";
+    video.pause();
+};
+</script>
+
+<!-- ANALYTICS MODAL JS -->
+<script>
+const analyticsModal = document.getElementById("analyticsModal");
+document.getElementById("openAnalytics").onclick = () => {
+    analyticsModal.style.display = "flex";
+};
+document.getElementById("closeAnalytics").onclick = () => {
+    analyticsModal.style.display = "none";
+};
+</script>
+
+<!-- CHARTS -->
+<script>
+new Chart(document.getElementById("touristBarChart"), {
+    type: "bar",
+    data: {
+        labels: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov"],
+        datasets: [{
+            label: "Tourist Visits",
+            data: [74,69,55,87,98,62,109,98,54,70,75],
+            backgroundColor: "#ff5e3a"
+        }]
+    },
+    options: { responsive: true }
+});
+
+new Chart(document.getElementById("populationPieChart"), {
+    type: "pie",
+    data: {
+        labels: ["Elders","Adults","Youth"],
+        datasets: [{
+            data: [20,55,25],
+            backgroundColor: ["#ff922b","#339af0","#845ef7"]
+        }]
+    },
+    options: { responsive: true }
+});
+</script>
+
+<script src="js/hamburger.js"></script>
+
+</body>
+</html>

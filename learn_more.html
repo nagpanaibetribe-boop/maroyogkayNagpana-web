@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Maroyog Kay Nagpana - Learn More</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- GOOGLE FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Chewy&family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+
+<!-- CSS -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/owl.carousel.min.css">
+<link rel="stylesheet" href="css/owl.theme.default.min.css">
+ <link rel="stylesheet" href="css/learn_more.css">
+
+</head>
+
+<body>
+
+<!-- ================= HERO ================= -->
+<section class="learn-hero">
+<a href="javascript:history.back()" class="back-btn">←</a>
+
+<div class="container text-center">
+<h1>Indigenous Writing Styles</h1>
+<p>Different tribes, one cultural identity</p>
+
+<div class="owl-carousel language-carousel mt-4">
+    <div class="writing-card">
+        <img src="./culture/12.jpg">
+        <h5>Nagpana Symbols</h5>
+    </div>
+    <div class="writing-card">
+        <img src="./culture/9.jpg">
+        <h5>Ati Script</h5>
+    </div>
+    <div class="writing-card">
+        <img src="./culture/12.jpg">
+        <h5>Mountain Tribe Marks</h5>
+    </div>
+</div>
+</div>
+</section>
+
+<!-- ================= CONTENT ================= -->
+<section class="learn-content">
+<div class="container">
+<div class="row">
+
+<!-- VIDEO -->
+<div class="col-lg-5 mb-4">
+<div class="video-card">
+<h4>Nagpana Speaking Inate</h4>
+<video controls>
+<source src="img/videos/nagpana-Inate.mp4" type="video/mp4">
+</video><br>
+<p> Listen to a native Nagpana speaker using common Inate phrases to preserve
+                        pronunciation, rhythm, and cultural meaning.</p>
+</div>
+</div>
+
+<!-- TRANSLATION -->
+<div class="col-lg-7 mb-4">
+<div class="language-box">
+
+<div class="translation-display">
+<div class="translation-label">Translation</div>
+<div id="inet" class="translation-text">Click a phrase</div>
+</div>
+
+<ul class="list-unstyled phrase-list">
+<li onclick="speak('Kamusta')">Hello</li>
+<li onclick="speak('Maayong aga')">Good Morning</li>
+<li onclick="speak('Maayong hapon')">Good Afternoon</li>
+<li onclick="speak('Maayong gab-i')">Good Evening</li>
+<li onclick="speak('Kamusta ka?')">How are you?</li>
+<li onclick="speak('Maayo man ako')">I am fine</li>
+<li onclick="speak('Ano ngaran mo?')">What is your name?</li>
+<li onclick="speak('Ngaran ko ay')">My name is</li>
+<li onclick="speak('Nalipay ako nga makilala ka')">Nice to meet you</li>
+<li onclick="speak('Palihog')">Please</li>
+<li onclick="speak('Salamat')">Thank you</li>
+<li onclick="speak('Wala sing ano man')">You are welcome</li>
+<li onclick="speak('Oo')">Yes</li>
+<li onclick="speak('Indi')">No</li>
+<li onclick="speak('Paalam')">Goodbye</li>
+</ul>
+
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- SCRIPTS -->
+<script src="js/jquery.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+
+<script>
+$('.language-carousel').owlCarousel({
+    loop:true,
+    margin:20,
+    autoplay:true,
+    autoplayTimeout:3000,
+    responsive:{
+        0:{items:1},
+        768:{items:2},
+        1200:{items:3}
+    }
+});
+
+/* ✅ TEXT TO SPEECH FIX */
+function speak(text){
+    document.getElementById("inet").innerText = text;
+
+    if('speechSynthesis' in window){
+        window.speechSynthesis.cancel();
+        let utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = "fil-PH";   // Filipino accent
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+    }
+}
+</script>
+
+</body>
+</html>

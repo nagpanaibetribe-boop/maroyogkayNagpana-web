@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Maroyog Kay Nagpana - Tourist Spot</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Your CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/tourist_spot.css">
+
+</head>
+
+<body>
+
+<button id="menu-toggle"><i class="fa fa-bars"></i></button>
+
+<div id="wrapper">
+
+    <!-- SIDEBAR -->
+    <div id="sidebar-wrapper">
+        <div class="sidebar-heading">
+            <a class="navbar-brand text-white" href="index.html">Maroyog</a>
+            <span>Kay Nagpana</span>
+        </div><br>
+
+  <div class="list-group list-group-flush">
+    <a href="index.html" class="list-group-item">Home</a>
+    <a href="people.html" class="list-group-item">People</a>
+    <a href="product.html" class="list-group-item">Product</a>
+    <a href="culture.html" class="list-group-item">Culture</a>
+    <a href="language.html" class="list-group-item">Language</a>
+    <a href="tourist_spot.html" class="list-group-item active">Tourist Spot</a>
+    <a href="review.html" class="list-group-item">Review</a>
+    <a href="booking.html" class="list-group-item">Booking</a>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="page-content-wrapper">
+
+<!-- HERO COVERFLOW -->
+<section class="hero-coverflow">
+  <div class="coverflow">
+    <input type="radio" name="slider" id="s1" checked>
+    <input type="radio" name="slider" id="s2">
+    <input type="radio" name="slider" id="s3">
+    <input type="radio" name="slider" id="s4">
+    <input type="radio" name="slider" id="s5">
+
+    <label for="s1" class="card"><img src="./spots/28.jpg"></label>
+    <label for="s2" class="card"><img src="./spots/waterfalls.jfif"></label>
+    <label for="s3" class="card"><img src="./spots/27.jpg"></label>
+    <label for="s4" class="card"><img src="./spots/30.jpg"></label>
+    <label for="s5" class="card"><img src="./spots/9.jpg"></label>
+  </div>
+</section>
+<!-- FALLS DESCRIPTION -->
+<section class="falls-section">
+  <div class="container">
+    <div class="row align-items-center">
+
+      <div class="col-md-6 position-relative">
+        <div id="fallsImage" class="falls-img"></div>
+
+        <button id="prevFalls" class="falls-prev">
+          <i class="fa fa-chevron-left"></i>
+        </button>
+
+        <button id="nextFalls" class="falls-next">
+          <i class="fa fa-chevron-right"></i>
+        </button>
+      </div>
+      
+
+      <div class="col-md-6 falls-text">
+        <h2 id="fallsTitle"></h2>
+        <p id="fallsDesc1"></p>
+        <p id="fallsDesc2"></p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- Footer -->
+        <footer class="ftco-footer bg-bottom ftco-no-pt" style="background-image: url(images/bg_3.jpg);">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-md pt-5">
+                        <div class="ftco-footer-widget pt-md-5 mb-4">
+                            <h2 class="ftco-heading-2">About</h2>
+                            <p>One of thousands of indigenous tribe in the Philippines Maroyog Kay Nagpana is a tribe living in the mountains of Barotac Viejo Iloilo.</p>
+                        </div>
+                    </div>
+                    <div class="col-md pt-5 border-left"></div>
+                    <div class="col-md pt-5 border-left"></div>
+                    <div class="col-md pt-5 border-left">
+                        <div class="ftco-footer-widget pt-md-5 mb-4">
+                            <h2 class="ftco-heading-2">Have a Questions?</h2>
+                            <ul>
+                                <li><span class="icon fa fa-map-marker"></span> Barotac Viejo, Iloilo City, Philippines</li>
+                                <li><span class="icon fa fa-phone"></span> +639090000000</li>
+                                <li><span class="icon fa fa-paper-plane"></span> info@nagpana.com</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+    <div class="col-md-12 text-center">
+        <p>&copy; <script>document.write(new Date().getFullYear());</script> Maroyog Kay Nagpana. Developed for Academic and Cultural Purposes.</p>
+    </div>
+</div>
+
+            </div>
+        </footer>
+
+</div>
+</div>
+<script>
+const fallsData = [
+  {
+    img: "./spots/30.jpg",
+    title: "🌊 Maroyog Hidden Falls",
+    d1: "Nestled deep in the mountains of Barotac Viejo, the Maroyog Hidden Falls is a sacred destination of the Nagpana tribe.",
+    d2: "Surrounded by lush forests and crystal-clear waters, the falls offer peace and a deep connection to nature."
+  },
+  {
+    img: "./spots/5.jpg",
+    title: "🌿 Maroyog Bridge",
+    d1: "A stunning twin waterfall hidden along the forest trail of Maroyog.",
+    d2: "Its cool mist and flowing streams make it a favorite resting spot for visitors."
+  },
+  {
+    img: "./spots/29.jpg",
+    title: "The Land of Nagpana",
+    d1: "This spring is believed by elders to be a source of healing and renewal.",
+    d2: "Visitors are encouraged to respect the sacredness of the place."
+  }
+];
+
+let fallsIndex = 0;
+
+const imgEl = document.getElementById("fallsImage");
+const titleEl = document.getElementById("fallsTitle");
+const d1El = document.getElementById("fallsDesc1");
+const d2El = document.getElementById("fallsDesc2");
+
+function updateFalls() {
+  imgEl.style.backgroundImage = `url('${fallsData[fallsIndex].img}')`;
+  titleEl.textContent = fallsData[fallsIndex].title;
+  d1El.textContent = fallsData[fallsIndex].d1;
+  d2El.textContent = fallsData[fallsIndex].d2;
+}
+
+document.getElementById("nextFalls").addEventListener("click", () => {
+  fallsIndex = (fallsIndex + 1) % fallsData.length;
+  updateFalls();
+});
+
+// initial load
+updateFalls();
+// Previous button logic
+document.getElementById("prevFalls").addEventListener("click", () => {
+  // If index is 0, it goes to the last item (length - 1)
+  fallsIndex = (fallsIndex - 1 + fallsData.length) % fallsData.length;
+  updateFalls();
+});
+
+// Next button logic (Keep your existing one)
+document.getElementById("nextFalls").addEventListener("click", () => {
+  fallsIndex = (fallsIndex + 1) % fallsData.length;
+  updateFalls();
+});
+</script>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/hamburger.js"></script>
+
+</body>
+</html>
